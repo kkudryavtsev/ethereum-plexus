@@ -54,6 +54,9 @@ footer {
   margin-top: 0px;
 }
 
+.dropdown-menu {
+  min-width:111px;
+}
 
 #news-slider-nav-ul > li > a {
   text-transform: lowercase;
