@@ -618,6 +618,19 @@ a:hover {
   display: inline-block
 }
 
+.I {
+  display: inline-block;
+  line-height: 1.4ex !important;
+  border-top: 1.5px solid #333;
+  border-bottom: 1.5px solid #333;
+
+  margin-left: 3px;
+  margin-right: 0;
+
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
 /* Pill style */
 #scrollUp {
   bottom: 20px;
