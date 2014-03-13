@@ -153,12 +153,13 @@ footer {
   color: #333;
   text-transform: lowercase;
   clear:left;
-  float:left;
+  display: table;
+  table-layout: fixed;
+  float:none;
   list-style:none;
-  margin:0;
+  margin:0 auto;
   padding:0;
   position:relative;
-  left:50%;
   text-align:center;
 }
 
@@ -184,7 +185,6 @@ footer {
   margin:0;
   padding:0;
   position:relative;
-  right:50%;
 }
 
 .navbar-nav > li > a {
@@ -222,7 +222,6 @@ footer {
   background-color: #fff;
   border-radius: 0;
 }
-
 
 .hr {
   border-bottom: 1px solid #494949;
@@ -699,16 +698,7 @@ a:hover {
    .button-previous {
      margin-left:-20em;
    }
-   .navbar-nav > li {
-     display:block;
-     float:left;
-     list-style:none;
-     margin:0;
-     padding:0;
-     position:relative;
-     right:50%;
-     clear:both;
-   }
+
    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     padding-bottom:150px;
     max-height: none;
