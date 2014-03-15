@@ -1,11 +1,12 @@
 div.text-center
   h4 the only limit is your imagination
-  p click to purchase ether
+  p.subheader click to purchase ether
   div#counters-primary.row
     div#total-sold-container.col-md-6
       div.inner.pull-right
         div.dial-container.pull-right
-          input(type="text", value="35").dial  
+          input(type="text", value="0").dial-total-sold
+          .dial-shim.dial-total-sold-shim
         div.headers.pull-right
           span.counter-header Total Sold
           span.counter-subheader Days left 
@@ -13,19 +14,33 @@ div.text-center
     div#sold-today-container.col-md-6
       div.inner.pull-left
         div.dial-container.pull-left
-          input(type="text", value="35").dial
+          input(type="text", value="0").dial-sold-today
         div.headers.pull-left  
           span.counter-header Sold Today
           span.counter-subheader
             span#sold-today-count.counter 0
-  div#counters-secondary.row
-    div#market-cap-container.col-md-4
-      span.counter-header Market Cap
-        $
-        span#market-cap-count.counter 0
-    div#total-sold-secondary-container.col-md-4
-      span.counter-header Total Sold
-      span#total-sold-count.counter 0
+  #counters-secondary.row
+    #market-cap-container.col-md-4
+      .inner.pull-right
+        span.counter-header Market Cap
+        span.counter
+          $
+          span#market-cap 0
+        a(href="#")
+          .plusicon +
+          span.link-title Market cap info
+    #total-sold-secondary-container.col-md-4
+      .inner
+        span.counter-header Total Sold
+        span#total-sold-count.strong.counter 0
+        a(href="#")
+          .plusicon +
+          span.link-title Buy Ether
     div#exchange-rate-container.col-md-4
-      span.counter-header Exchange Rate
-      span.counter 1BTC = 2,000Ether
+      div.inner.pull-left
+        span.counter-header Exchange Rate
+        span.counter 1BTC = 2,000Ether
+        a(href="#")
+          .plusicon +
+          span.link-title Exchanges
+        

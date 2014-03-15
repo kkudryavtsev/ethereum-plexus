@@ -700,20 +700,34 @@ a:hover {
     overflow-x: hidden;
   }
 }
+#presale-counters a{
+  text-decoration: none;
+}
+
+#presale-counters h4{
+  margin:0;
+}
+
+#presale-counters p.subheader{
+  font-weight: bold;
+  margin: 5px 0 10px;
+}
 
 #counters-primary .dial-container{
   display: inline-block;
   width: 80px;
   height: 80px;
   overflow: hidden;
-  font-size: 30px;
+  font-size: 22px;
+  position: relative;
 }
 
 #total-sold-counter .inner{
   margin-right: 10px;
 }
 
-#counters-primary .counter-header, #counters-primary .counter-subheader{
+#counters-primary .counter-header, #counters-primary .counter-subheader,
+#counters-secondary .counter-header, #counters-secondary .counter-subheader{
   display: block;
 }
 #counters-primary .headers{
@@ -725,4 +739,34 @@ a:hover {
 }
 #counters-primary .counter-subheader{
   font-weight: bold;
+}
+#counters-primary .dial-shim {
+  position:absolute;
+  top:23px;
+  left: -50%;
+  margin-left: 44px;
+}
+
+#counters-secondary .counter-header{
+  font-weight: bold;
+}
+
+#counters-secondary .counter{
+  font-size: 22px;
+}
+
+#counters-secondary .counter.strong{
+  font-size: 27px;
+  line-height: 31px;
+  font-weight: bold;
+}
+#counters-secondary .plusicon{
+  width: 20px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin: 5px auto;
+}
+#counters-secondary .link-title{
+  font-weight:bold;
+  display:block;
 }

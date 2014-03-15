@@ -82,6 +82,7 @@ module.exports = function (grunt) {
     'linker/js/video-background.js',
     'linker/js/bootstrap.min.js',
     'linker/js/jquery.knob.js',
+    'linker/js/numeral.js',
     'linker/js/main.js'
 
     // DO NOT USE. INSERT STATIC PATH ABOVE

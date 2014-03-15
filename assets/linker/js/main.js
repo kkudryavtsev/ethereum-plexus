@@ -1,3 +1,4 @@
+
 $(function() {
 
   $(".scroll").click(function(event) {
@@ -117,17 +118,54 @@ $(function() {
 
   
   var initPresaleCounters = function(){
-    $(".dial").knob({
-      //readOnly: true,
+    var ETHER_FOR_BTC=2000,
+        FUNDRAISING_ADDRESS="1FfmbHfnpaZjKFvyi1okTjJJusN455paPH",
+        MAX_ETHER_TO_SELL=1000000000,
+        MAX_ETHER_TO_SELL_PER_DAY=500000,
+        COUNTERS_UPDATE_INTERVAL=10000,//let's be kind to blockchain.info
+        SATOSHIS_IN_BTC=100000000;
+    
+    $(".dial-total-sold").knob({
+      readOnly: true,
       thickness: 0.05,
       width: 80,
       fgColor: "#333",
       bgColor: "#ddd",
-      font: "inherit"
+      font: "inherit",
+      max: MAX_ETHER_TO_SELL
     }).find("input").css({
       height: "34px",
-      "margin-top": "19px"
+      "margin-top": "19px",
+      color: "#fff"
     });
+
+    $(".dial-sold-today").knob({
+      readOnly: true,
+      thickness: 0.05,
+      width: 80,
+      fgColor: "#333",
+      bgColor: "#ddd",
+      font: "inherit",
+      max: MAX_ETHER_TO_SELL_PER_DAY
+    }).find("input").css({
+      height: "34px",
+      "margin-top": "19px",
+      color: "#fff"
+    });
+
+    updateCounters = function(){
+      $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
+        var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC),
+            eth = btc*ETHER_FOR_BTC;
+
+        $("#total-sold-count").text(numeral(eth).format("0,0"));
+        $(".dial-total-sold").val(eth).change();
+        $(".dial-total-sold-shim").text(numeral(eth).format("0.0a"));
+      });
+    };
+    updateCounters();
+    
+    window.setInterval(updateCounters,COUNTERS_UPDATE_INTERVAL);
   };
 
   initPresaleCounters();
