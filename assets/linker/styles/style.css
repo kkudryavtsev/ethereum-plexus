@@ -30,12 +30,12 @@ footer {
 
 
 /*
-#maincontent > div {
+  #maincontent > div {
   max-width:900px;
   margin:0 auto;
   padding-top:30px;
-}
-*/
+  }
+  */
 
 .maincontent {
   background-image:url('/images/bg-img.jpg');
@@ -44,7 +44,7 @@ footer {
   background-repeat: no-repeat;
 }
 
-#interactive {
+#interactive, #presale-counters {
   padding-top:10px;
   padding-bottom:20px;
   margin-top:-60px;
@@ -254,9 +254,10 @@ footer {
   margin-right:auto;
 }
 
-#interactive-content {
+#interactive-content, #presale-counters-content {
   background-color:#fff;
 }
+
 
 .interactive-middle {
   padding:30px 0 !important;
@@ -429,14 +430,14 @@ footer {
 }
 
 #code-slider pre {
-   background-color: transparent;
-   border: none;
-   border-radius: 0;
- }
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
 
- #code-slider h4 {
-   text-align: right;
- }
+#code-slider h4 {
+  text-align: right;
+}
 
 
 .fa-8x {
@@ -585,7 +586,7 @@ a:hover {
   height: 20px;
   max-height: 20px;
   min-height: 20px;
-  /*border: 1px solid blue;*/
+/*border: 1px solid blue;*/
 }
 #apps-examples .apps {
   margin-top: -1em;
@@ -655,19 +656,6 @@ a:hover {
     position: relative;
   }
 
-@media (max-width: 768px) {
-  .timer-unit {
-    border: 1px solid #333;
-    font-size: 150%;
-    border-radius: 50%;
-    padding: 1ex;
-    margin-left: 1ex;
-    margin-right: 1ex;
-    font-family:RobotoThin !important;
-    display: inline-block;
-    position: relative;
-  }
-
   .timer-unit-desc {
     position: relative;
     margin-top: 1ex;
@@ -676,39 +664,65 @@ a:hover {
 
   .fa-8x {
     font-size:500%;
-   }
+  }
 
-   #content-circle {
-     width:150px;
-     height:150px;
-     padding:1.2em;
-     margin:0;
-     margin-bottom:1em;
-   }
+  #content-circle {
+    width:150px;
+    height:150px;
+    padding:1.2em;
+    margin:0;
+    margin-bottom:1em;
+  }
 
-   #how button.paging {
-     top:55px;
-   }
+  #how button.paging {
+    top:55px;
+  }
 
-   button.paging prev {
-     margin-left:-65px;
-   }
-   .button-previous {
-     margin-left:-20em;
-   }
-   .navbar-nav > li {
-     display:block;
-     float:left;
-     list-style:none;
-     margin:0;
-     padding:0;
-     position:relative;
-     right:50%;
-     clear:both;
-   }
-   .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  button.paging prev {
+    margin-left:-65px;
+  }
+  .button-previous {
+    margin-left:-20em;
+  }
+  .navbar-nav > li {
+    display:block;
+    float:left;
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:relative;
+    right:50%;
+    clear:both;
+  }
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     padding-bottom:150px;
     max-height: none;
     overflow-x: hidden;
- }
+  }
+}
+
+#counters-primary .dial-container{
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  font-size: 30px;
+}
+
+#total-sold-counter .inner{
+  margin-right: 10px;
+}
+
+#counters-primary .counter-header, #counters-primary .counter-subheader{
+  display: block;
+}
+#counters-primary .headers{
+  padding: 13px;
+}
+
+#counters-primary .counter-header{
+  font-size: 24px;
+}
+#counters-primary .counter-subheader{
+  font-weight: bold;
 }

@@ -81,7 +81,8 @@ module.exports = function (grunt) {
     'linker/js/meetupmap.js',
     'linker/js/video-background.js',
     'linker/js/bootstrap.min.js',
-    'linker/js/main.js',
+    'linker/js/jquery.knob.js',
+    'linker/js/main.js'
 
     // DO NOT USE. INSERT STATIC PATH ABOVE
     // Uncommenting the line below will result in revoking push access

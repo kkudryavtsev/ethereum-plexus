@@ -111,8 +111,24 @@ $(function() {
     dynamicTabs: false,
     dynamicArrows: false,
     slideEaseDuration: 600,
-    crossLinks: true,
+    crossLinks: true
   });
 
 
+  
+  var initPresaleCounters = function(){
+    $(".dial").knob({
+      //readOnly: true,
+      thickness: 0.05,
+      width: 80,
+      fgColor: "#333",
+      bgColor: "#ddd",
+      font: "inherit"
+    }).find("input").css({
+      height: "34px",
+      "margin-top": "19px"
+    });
+  };
+
+  initPresaleCounters();
 });
