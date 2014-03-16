@@ -28,15 +28,6 @@ footer {
   padding-top: 1em;
 }
 
-
-/*
-#maincontent > div {
-  max-width:900px;
-  margin:0 auto;
-  padding-top:30px;
-}
-*/
-
 .maincontent {
   background-image:url('/images/bg-img.jpg?20140310130500');
   background-color: #f5f5f5;
@@ -240,7 +231,7 @@ footer {
 #feature {
   position: relative;
   overflow: hidden;
-  height:375px;
+  height:450px;
   padding:0;
   top:-60px;
   margin-top:-60px;
