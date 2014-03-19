@@ -272,6 +272,13 @@ footer {
   background-color:#fff;
 }
 
+#philosophy-right{
+  text-align: center;
+  padding-right: 0;
+  padding-top: 35px;
+  padding-left: 75px;
+}
+
 #how-content {
   background-color:transparent;
 }
@@ -428,7 +435,7 @@ footer {
  }
 
  #code-slider h4 {
-   text-align: right;
+   text-align: center;
  }
 
 
@@ -446,6 +453,30 @@ footer {
 
 #how button.paging:disabled{
   color: gray;
+}
+
+.how-icons{
+  text-align: center;
+  vertical-align: middle;
+}
+
+#how-circle{
+  text-align: center;
+  vertical-align: middle;
+}
+
+#what-make{
+  text-align: center;
+  margin-top: 60px;
+}
+
+.fa-pencil-square-o{
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.fa-briefcase{
+  padding-top: 10px;
 }
 
 #content-circle > span {
@@ -474,6 +505,10 @@ img[usemap] {
 }
 
 .philosophy-icons:focus {
+  color:#fff;
+}
+
+.philosophy-icons:active{
   color:#fff;
 }
 
@@ -703,5 +738,10 @@ a:hover {
     padding-bottom:150px;
     max-height: none;
     overflow-x: hidden;
- }
+  }
+
+  #philosophy-right{
+    padding-left: 15px
+  }
+
 }
