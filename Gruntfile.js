@@ -83,6 +83,8 @@ module.exports = function (grunt) {
     'linker/js/bootstrap.min.js',
     'linker/js/jquery.knob.js',
     'linker/js/numeral.js',
+    'linker/js/underscore-min.js',
+    'linker/js/moment.min.js',
     'linker/js/main.js'
 
     // DO NOT USE. INSERT STATIC PATH ABOVE

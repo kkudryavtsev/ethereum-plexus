@@ -120,52 +120,87 @@ $(function() {
   var initPresaleCounters = function(){
     var ETHER_FOR_BTC=2000,
         FUNDRAISING_ADDRESS="1FfmbHfnpaZjKFvyi1okTjJJusN455paPH",
-        MAX_ETHER_TO_SELL=1000000000,
-        MAX_ETHER_TO_SELL_PER_DAY=500000,
-        COUNTERS_UPDATE_INTERVAL=10000,//let's be kind to blockchain.info
-        SATOSHIS_IN_BTC=100000000;
-    
-    $(".dial-total-sold").knob({
+        SATOSHIS_IN_BTC=100000000,
+        START_DATETIME= "2014-03-22 00:00:00",
+        END_DATETIME= "2014-03-29 00:00:00";
+
+    var knobDefaults = {
       readOnly: true,
       thickness: 0.05,
-      width: 80,
+      width: 40,
       fgColor: "#333",
       bgColor: "#ddd",
-      font: "inherit",
-      max: MAX_ETHER_TO_SELL
-    }).find("input").css({
-      height: "34px",
-      "margin-top": "19px",
-      color: "#fff"
-    });
-
-    $(".dial-sold-today").knob({
-      readOnly: true,
-      thickness: 0.05,
-      width: 80,
-      fgColor: "#333",
-      bgColor: "#ddd",
-      font: "inherit",
-      max: MAX_ETHER_TO_SELL_PER_DAY
-    }).find("input").css({
-      height: "34px",
-      "margin-top": "19px",
-      color: "#fff"
-    });
-
-    updateCounters = function(){
-      $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
-        var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC),
-            eth = btc*ETHER_FOR_BTC;
-
-        $("#total-sold-count").text(numeral(eth).format("0,0"));
-        $(".dial-total-sold").val(eth).change();
-        $(".dial-total-sold-shim").text(numeral(eth).format("0.0a"));
-      });
+      font: "inherit"
     };
-    updateCounters();
+    var startsAt = moment(START_DATETIME),
+        endsAt = moment(END_DATETIME),
+        $saleDurationDials = $("#sale-duration-container"),
+        $rateCountdownDials = $("#rate-countdown-container");
+
+    var createKnob = function($el, settings){
+      $el.knob(_.extend({}, knobDefaults, settings));
+    };
+
+    var setupTimerDials = function($container,start,end){
+      createKnob($container.find(".dial.days"), {max: moment(end.diff(start)).days() });
+      createKnob($container.find(".dial.hours"), {max: 24});
+      createKnob($container.find(".dial.minutes"), {max: 60});
+      createKnob($container.find(".dial.seconds"), {max: 60});
+    };
+
+    setupTimerDials($saleDurationDials, startsAt, endsAt);
+    setupTimerDials($rateCountdownDials, startsAt, endsAt);
     
-    window.setInterval(updateCounters,COUNTERS_UPDATE_INTERVAL);
+    $("#counters-primary input").css({
+      height: "26px",
+      "margin-top": "5px"
+    });
+
+    var updateTimerDial = function($container, type){
+      $container.find(".dial." + type).val(moment(endsAt.diff(moment()))[type]()).change();
+    };
+    
+    var updateTimerDials = function($container){
+      updateTimerDial($container, "days");
+      updateTimerDial($container, "hours");
+      updateTimerDial($container, "minutes");
+      updateTimerDial($container, "seconds");
+    };
+    updateTimerDials($saleDurationDials);
+    updateTimerDials($rateCountdownDials);
+
+
+    window.setInterval(function(){
+      updateTimerDials($saleDurationDials);
+      updateTimerDials($rateCountdownDials);
+    },1000);
+
+    $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
+      var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC);
+      $("#total-sold-container .total").text(numeral(btc).format("0,0"));
+    });
+
+    $('#presale-counters-slider').liquidSlider({
+      autoSlide: false,
+      dynamicTabs: false,
+      dynamicArrows: false,
+      hideSideArrows: true,
+      slideEaseDuration: 600
+    });
+    
+    // updateCounters = function(){
+    //   $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
+    //     var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC),
+    //         eth = btc*ETHER_FOR_BTC;
+
+    //     $("#total-sold-count").text(numeral(eth).format("0,0"));
+    //     $(".dial-total-sold").val(eth).change();
+    //     $(".dial-total-sold-shim").text(numeral(eth).format("0.0a"));
+    //   });
+    // };
+    // updateCounters();
+    
+    // window.setInterval(updateCounters,COUNTERS_UPDATE_INTERVAL);
   };
 
   initPresaleCounters();

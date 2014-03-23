@@ -715,15 +715,21 @@ a:hover {
 
 #counters-primary .dial-container{
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 90px;
   overflow: hidden;
   font-size: 22px;
   position: relative;
 }
-
-#total-sold-counter .inner{
-  margin-right: 10px;
+#counters-primary .dial-label{
+  position: absolute;
+  left:0;
+  top: 45px;
+  width: 60px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #777;
 }
 
 #counters-primary .counter-header, #counters-primary .counter-subheader,
@@ -734,39 +740,54 @@ a:hover {
   padding: 13px;
 }
 
-#counters-primary .counter-header{
-  font-size: 24px;
+#counters-primary h4{
+  text-transform:none;
+  font-weight:bold;
+  font-size: 16px;
+  margin-bottom: 25px;
 }
-#counters-primary .counter-subheader{
-  font-weight: bold;
-}
+
+
 #counters-primary .dial-shim {
   position:absolute;
   top:23px;
   left: -50%;
   margin-left: 44px;
 }
-
-#counters-secondary .counter-header{
-  font-weight: bold;
+#counters-primary .delimiter{
+  font-size: 34px;
+  line-height: 52px;
+  vertical-align: top;
 }
 
-#counters-secondary .counter{
+#total-sold-container .total{
+  font-size: 45px;
+}
+
+#total-sold-container .total-currency-label{
   font-size: 22px;
 }
 
-#counters-secondary .counter.strong{
-  font-size: 27px;
-  line-height: 31px;
-  font-weight: bold;
+#total-sold-container .amount{
+  font-size: 22px;
 }
-#counters-secondary .plusicon{
-  width: 20px;
-  border: 1px solid #333;
-  border-radius: 10px;
-  margin: 5px auto;
+
+#total-sold-container .amount-currency-label{
+  font-size: 16px;
 }
-#counters-secondary .link-title{
-  font-weight:bold;
-  display:block;
+#total-sold-container a{
+  font-size: 12px;
+}
+#total-sold-container h4.subheadline{
+  margin-bottom: 0;
+  line-height: 30px;
+}
+
+#counters-secondary .btn-buy-ether{
+  background-color: #333;
+  padding: 5px;
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  color: #fff;
 }
