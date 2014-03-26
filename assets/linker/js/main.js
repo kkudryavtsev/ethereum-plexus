@@ -122,7 +122,7 @@ $(function() {
         FUNDRAISING_ADDRESS="1FfmbHfnpaZjKFvyi1okTjJJusN455paPH",
         SATOSHIS_IN_BTC=100000000,
         START_DATETIME= "2014-03-22 00:00:00",
-        END_DATETIME= "2014-03-27 00:00:00";
+        END_DATETIME= "2014-03-29 00:00:00";
     
 
     var knobDefaults = {
@@ -133,8 +133,8 @@ $(function() {
       bgColor: "#ddd",
       font: "inherit"
     };
-    var startsAt = moment(START_DATETIME),
-        endsAt = moment(END_DATETIME),
+    var startsAt = moment(START_DATETIME).zone(0),
+        endsAt = moment(END_DATETIME).zone(0),
         $saleDurationDials = $("#sale-duration-container"),
         $rateCountdownDials = $("#rate-countdown-container");
 
@@ -188,10 +188,10 @@ $(function() {
       updateTimerDial($container, "seconds", delta);
     };
     var updateAllDials = function(){
-      if(endsAt.isAfter(moment())){
-        updateTimerDials($saleDurationDials, dhms(1000*(endsAt.unix() - moment().unix())));
+      if(endsAt.isAfter(moment().zone(0))){
+        updateTimerDials($saleDurationDials, dhms(1000*(endsAt.unix() - moment().zone(0).unix())));
 
-        var delta = dhms(moment().diff(startsAt));
+        var delta = dhms(moment().zone(0).diff(startsAt));
         delta.hours = 24 - delta.hours - 1;
         delta.minutes = 60 - delta.minutes - 1;
         delta.seconds = 60 - delta.seconds;
