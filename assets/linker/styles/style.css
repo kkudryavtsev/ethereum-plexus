@@ -777,6 +777,7 @@ a:hover {
 }
 #total-sold-container a{
   font-size: 12px;
+  display: block;
 }
 #total-sold-container h4.subheadline{
   margin-bottom: 0;

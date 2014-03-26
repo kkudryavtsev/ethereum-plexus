@@ -122,7 +122,8 @@ $(function() {
         FUNDRAISING_ADDRESS="1FfmbHfnpaZjKFvyi1okTjJJusN455paPH",
         SATOSHIS_IN_BTC=100000000,
         START_DATETIME= "2014-03-22 00:00:00",
-        END_DATETIME= "2014-03-29 00:00:00";
+        END_DATETIME= "2014-03-27 00:00:00";
+    
 
     var knobDefaults = {
       readOnly: true,
@@ -140,40 +141,77 @@ $(function() {
     var createKnob = function($el, settings){
       $el.knob(_.extend({}, knobDefaults, settings));
     };
+    var dhms = function(t){
+      var cd = 24 * 60 * 60 * 1000,
+          ch = 60 * 60 * 1000,
+          cm = 60 * 1000,
+          
+          d = Math.floor(t / cd),
+          h = Math.floor( (t - d * cd) / ch),
+          m = Math.floor( (t - d * cd - h * ch) / cm),
+          s = Math.round( (t - d * cd - h * ch - m * cm) / 1000);
+      
+      return {
+        days: d,
+        hours: h,
+        minutes: m,
+        seconds: s
+      };
+    };
 
-    var setupTimerDials = function($container,start,end){
-      createKnob($container.find(".dial.days"), {max: moment(end.diff(start)).days() });
+    
+
+    var setupTimerDials = function($container,maxdays){
+      createKnob($container.find(".dial.days"), {max: maxdays });
       createKnob($container.find(".dial.hours"), {max: 24});
       createKnob($container.find(".dial.minutes"), {max: 60});
       createKnob($container.find(".dial.seconds"), {max: 60});
     };
 
-    setupTimerDials($saleDurationDials, startsAt, endsAt);
-    setupTimerDials($rateCountdownDials, startsAt, endsAt);
+    setupTimerDials($saleDurationDials, dhms(endsAt.diff(startsAt)).days);
+    setupTimerDials($rateCountdownDials, 0);
+
     
     $("#counters-primary input").css({
       height: "26px",
       "margin-top": "5px"
     });
 
-    var updateTimerDial = function($container, type){
-      $container.find(".dial." + type).val(moment(endsAt.diff(moment()))[type]()).change();
+    var updateTimerDial = function($container, type, delta){
+      $container.find(".dial." + type).val(delta[type]).change();
     };
     
-    var updateTimerDials = function($container){
-      updateTimerDial($container, "days");
-      updateTimerDial($container, "hours");
-      updateTimerDial($container, "minutes");
-      updateTimerDial($container, "seconds");
+    var updateTimerDials = function($container, delta){
+      updateTimerDial($container, "days", delta);
+      updateTimerDial($container, "hours", delta);
+      updateTimerDial($container, "minutes", delta);
+      updateTimerDial($container, "seconds", delta);
     };
-    updateTimerDials($saleDurationDials);
-    updateTimerDials($rateCountdownDials);
+    var updateAllDials = function(){
+      if(endsAt.isAfter(moment())){
+        updateTimerDials($saleDurationDials, dhms(1000*(endsAt.unix() - moment().unix())));
+
+        var delta = dhms(moment().diff(startsAt));
+        delta.hours = 24 - delta.hours - 1;
+        delta.minutes = 60 - delta.minutes - 1;
+        delta.seconds = 60 - delta.seconds;
+
+        $(".eth-to-btc").text(numeral(Math.round(2000 * (100-delta.days) / 100)).format("0,0"));
+        $(".next-eth-to-btc").text(numeral(Math.round(2000 * (99-delta.days) / 100)).format("0,0"));
+        delta.days = 0;
+        updateTimerDials($rateCountdownDials, delta);
+      }else{
+        $(".hide-after-end").hide();
+      }
+    };
+
+    updateAllDials();
 
 
     window.setInterval(function(){
-      updateTimerDials($saleDurationDials);
-      updateTimerDials($rateCountdownDials);
+      updateAllDials();
     },1000);
+
 
     $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
       var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC);
@@ -188,19 +226,6 @@ $(function() {
       slideEaseDuration: 600
     });
     
-    // updateCounters = function(){
-    //   $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
-    //     var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC),
-    //         eth = btc*ETHER_FOR_BTC;
-
-    //     $("#total-sold-count").text(numeral(eth).format("0,0"));
-    //     $(".dial-total-sold").val(eth).change();
-    //     $(".dial-total-sold-shim").text(numeral(eth).format("0.0a"));
-    //   });
-    // };
-    // updateCounters();
-    
-    // window.setInterval(updateCounters,COUNTERS_UPDATE_INTERVAL);
   };
 
   initPresaleCounters();
