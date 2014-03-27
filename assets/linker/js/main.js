@@ -1,3 +1,4 @@
+
 $(function() {
 
   $(".scroll").click(function(event) {
@@ -111,8 +112,121 @@ $(function() {
     dynamicTabs: false,
     dynamicArrows: false,
     slideEaseDuration: 600,
-    crossLinks: true,
+    crossLinks: true
   });
 
 
+  
+  var initPresaleCounters = function(){
+    var ETHER_FOR_BTC=2000,
+        FUNDRAISING_ADDRESS="1FfmbHfnpaZjKFvyi1okTjJJusN455paPH",
+        SATOSHIS_IN_BTC=100000000,
+        START_DATETIME= "2014-03-22 00:00:00",
+        END_DATETIME= "2014-03-29 00:00:00";
+    
+
+    var knobDefaults = {
+      readOnly: true,
+      thickness: 0.05,
+      width: 40,
+      fgColor: "#333",
+      bgColor: "#ddd",
+      font: "inherit"
+    };
+    var startsAt = moment(START_DATETIME).zone(0),
+        endsAt = moment(END_DATETIME).zone(0),
+        $saleDurationDials = $("#sale-duration-container"),
+        $rateCountdownDials = $("#rate-countdown-container");
+
+    var createKnob = function($el, settings){
+      $el.knob(_.extend({}, knobDefaults, settings));
+    };
+    var dhms = function(t){
+      var cd = 24 * 60 * 60 * 1000,
+          ch = 60 * 60 * 1000,
+          cm = 60 * 1000,
+          
+          d = Math.floor(t / cd),
+          h = Math.floor( (t - d * cd) / ch),
+          m = Math.floor( (t - d * cd - h * ch) / cm),
+          s = Math.round( (t - d * cd - h * ch - m * cm) / 1000);
+      
+      return {
+        days: d,
+        hours: h,
+        minutes: m,
+        seconds: s
+      };
+    };
+
+    
+
+    var setupTimerDials = function($container,maxdays){
+      createKnob($container.find(".dial.days"), {max: maxdays });
+      createKnob($container.find(".dial.hours"), {max: 24});
+      createKnob($container.find(".dial.minutes"), {max: 60});
+      createKnob($container.find(".dial.seconds"), {max: 60});
+    };
+
+    setupTimerDials($saleDurationDials, dhms(endsAt.diff(startsAt)).days);
+    setupTimerDials($rateCountdownDials, 0);
+
+    
+    $("#counters-primary input").css({
+      height: "26px",
+      "margin-top": "5px"
+    });
+
+    var updateTimerDial = function($container, type, delta){
+      $container.find(".dial." + type).val(delta[type]).change();
+    };
+    
+    var updateTimerDials = function($container, delta){
+      updateTimerDial($container, "days", delta);
+      updateTimerDial($container, "hours", delta);
+      updateTimerDial($container, "minutes", delta);
+      updateTimerDial($container, "seconds", delta);
+    };
+    var updateAllDials = function(){
+      if(endsAt.isAfter(moment().zone(0))){
+        updateTimerDials($saleDurationDials, dhms(1000*(endsAt.unix() - moment().zone(0).unix())));
+
+        var delta = dhms(moment().zone(0).diff(startsAt));
+        delta.hours = 24 - delta.hours - 1;
+        delta.minutes = 60 - delta.minutes - 1;
+        delta.seconds = 60 - delta.seconds;
+
+        $(".eth-to-btc").text(numeral(Math.round(2000 * (100-delta.days) / 100)).format("0,0"));
+        $(".next-eth-to-btc").text(numeral(Math.round(2000 * (99-delta.days) / 100)).format("0,0"));
+        delta.days = 0;
+        updateTimerDials($rateCountdownDials, delta);
+      }else{
+        $(".hide-after-end").hide();
+      }
+    };
+
+    updateAllDials();
+
+
+    window.setInterval(function(){
+      updateAllDials();
+    },1000);
+
+
+    $.get("https://blockchain.info/q/getreceivedbyaddress/" + FUNDRAISING_ADDRESS ,function(received){
+      var btc = Math.round(parseInt(received,10)/SATOSHIS_IN_BTC);
+      $("#total-sold-container .total").text(numeral(btc).format("0,0"));
+    });
+
+    $('#presale-counters-slider').liquidSlider({
+      autoSlide: false,
+      dynamicTabs: false,
+      dynamicArrows: false,
+      hideSideArrows: true,
+      slideEaseDuration: 600
+    });
+    
+  };
+
+  initPresaleCounters();
 });

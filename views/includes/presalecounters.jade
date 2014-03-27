@@ -1,0 +1,67 @@
+div#presale-counters-slider.text-center.liquid-slider
+  div.container
+    div#counters-primary.row
+      div#sale-duration-container.col-md-4
+        div.inner.hide-after-end
+          h4 Sale duration:
+          div.dial-container
+            input(type="text", value="0").dial.days
+            span.dial-label Days
+          span.delimiter :
+          div.dial-container
+            input(type="text", value="0").dial.hours
+            .dial-shim.dial-duration-hours-shim
+            span.dial-label Hours
+          span.delimiter :
+          div.dial-container
+            input(type="text", value="0").dial.minutes
+            .dial-shim.minutes
+            span.dial-label Minutes
+          span.delimiter :
+          div.dial-container
+            input(type="text", value="0").dial.seconds
+            .dial-shim.seconds
+            span.dial-label Seconds
+      div#total-sold-container.col-md-4
+        div.inner
+          h4 Total ether purchased:
+          span.total
+          span.total-currency-label BTC
+          h4.subheadline.hide-after-end Current exchange rate:
+          #exchange-rate-container.hide-after-end
+            span.amount 1
+            span.amount-currency-label BTC
+            span.amount =
+            span.amount.eth-to-btc 2000
+            span.amount-currency-label ETH
+          a(href="#") Terms and conditions
+      div#rate-countdown-container.col-md-4
+        div.inner.hide-after-end
+          h4 Until new rate: 1BTC=
+            span.next-eth-to-btc 2000
+            ETH
+          div.dial-container
+            input(type="text", value="0").dial.days
+            span.dial-label Days
+          span.delimiter :
+          div.dial-container
+            input(type="text", value="0").dial.hours
+            .dial-shim.dial-duration-hours-shim
+            span.dial-label Hours
+          span.delimiter :
+          div.dial-container
+            input(type="text", value="0").dial.minutes
+            .dial-shim.minutes
+            span.dial-label Minutes
+          span.delimiter :
+          div.dial-container
+            input(type="text", value="0").dial.seconds
+            .dial-shim.seconds
+            span.dial-label Seconds
+    #counters-secondary.row
+      .col-md-4
+      .col-md-4
+      .col-md-4
+        a(href="#right", data-liquidslider-ref="#presale-counters-slider").btn-buy-ether.hide-after-end Buy Ether
+  #ethersale-app
+    h2 Ethersale app      

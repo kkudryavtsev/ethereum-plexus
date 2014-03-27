@@ -28,14 +28,23 @@ footer {
   padding-top: 1em;
 }
 
+
+/*
+  #maincontent > div {
+  max-width:900px;
+  margin:0 auto;
+  padding-top:30px;
+  }
+  */
+
 .maincontent {
-  background-image:url('/images/bg-img.jpg?20140310130500');
+  background-image:url('/images/bg-img.jpg');
   background-color: #f5f5f5;
   background-size:100%;
   background-repeat: no-repeat;
 }
 
-#interactive {
+#interactive, #presale-counters {
   padding-top:10px;
   padding-bottom:20px;
   margin-top:-60px;
@@ -45,9 +54,6 @@ footer {
   margin-top: 0px;
 }
 
-.dropdown-menu {
-  min-width:111px;
-}
 
 #news-slider-nav-ul > li > a {
   text-transform: lowercase;
@@ -96,7 +102,7 @@ footer {
 }
 
 .jumbotron {
-  background: #f5f5f5 url('/images/poster.jpg?20140310130500') no-repeat center center fixed;
+  background: #f5f5f5 url('/images/poster.jpg') no-repeat center center fixed;
   margin:0;
   padding-bottom:45px;
   padding-top:15px;
@@ -144,13 +150,12 @@ footer {
   color: #333;
   text-transform: lowercase;
   clear:left;
-  display: table;
-  table-layout: fixed;
-  float:none;
+  float:left;
   list-style:none;
-  margin:0 auto;
+  margin:0;
   padding:0;
   position:relative;
+  left:50%;
   text-align:center;
 }
 
@@ -176,6 +181,7 @@ footer {
   margin:0;
   padding:0;
   position:relative;
+  right:50%;
 }
 
 .navbar-nav > li > a {
@@ -214,6 +220,7 @@ footer {
   border-radius: 0;
 }
 
+
 .hr {
   border-bottom: 1px solid #494949;
 }
@@ -231,7 +238,7 @@ footer {
 #feature {
   position: relative;
   overflow: hidden;
-  height:450px;
+  height:375px;
   padding:0;
   top:-60px;
   margin-top:-60px;
@@ -247,9 +254,10 @@ footer {
   margin-right:auto;
 }
 
-#interactive-content {
+#interactive-content, #presale-counters-content {
   background-color:#fff;
 }
+
 
 .interactive-middle {
   padding:30px 0 !important;
@@ -270,13 +278,6 @@ footer {
 
 #philosophy-content {
   background-color:#fff;
-}
-
-#philosophy-right{
-  text-align: center;
-  padding-right: 0;
-  padding-top: 35px;
-  padding-left: 75px;
 }
 
 #how-content {
@@ -429,14 +430,14 @@ footer {
 }
 
 #code-slider pre {
-   background-color: transparent;
-   border: none;
-   border-radius: 0;
- }
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
 
- #code-slider h4 {
-   text-align: center;
- }
+#code-slider h4 {
+  text-align: right;
+}
 
 
 .fa-8x {
@@ -453,30 +454,6 @@ footer {
 
 #how button.paging:disabled{
   color: gray;
-}
-
-.how-icons{
-  text-align: center;
-  vertical-align: middle;
-}
-
-#how-circle{
-  text-align: center;
-  vertical-align: middle;
-}
-
-#what-make{
-  text-align: center;
-  margin-top: 60px;
-}
-
-.fa-pencil-square-o{
-  padding-left: 10px;
-  padding-top: 5px;
-}
-
-.fa-briefcase{
-  padding-top: 10px;
 }
 
 #content-circle > span {
@@ -505,10 +482,6 @@ img[usemap] {
 }
 
 .philosophy-icons:focus {
-  color:#fff;
-}
-
-.philosophy-icons:active{
   color:#fff;
 }
 
@@ -613,7 +586,7 @@ a:hover {
   height: 20px;
   max-height: 20px;
   min-height: 20px;
-  /*border: 1px solid blue;*/
+/*border: 1px solid blue;*/
 }
 #apps-examples .apps {
   margin-top: -1em;
@@ -642,19 +615,6 @@ a:hover {
 
 .inline-block {
   display: inline-block
-}
-
-.I {
-  display: inline-block;
-  line-height: 1.4ex !important;
-  border-top: 1.5px solid #333;
-  border-bottom: 1.5px solid #333;
-
-  margin-left: 3px;
-  margin-right: 0;
-
-  padding-left: 2px;
-  padding-right: 2px;
 }
 
 /* Pill style */
@@ -704,44 +664,131 @@ a:hover {
 
   .fa-8x {
     font-size:500%;
-   }
+  }
 
-   #content-circle {
-     width:150px;
-     height:150px;
-     padding:1.2em;
-     margin:0;
-     margin-bottom:1em;
-   }
+  #content-circle {
+    width:150px;
+    height:150px;
+    padding:1.2em;
+    margin:0;
+    margin-bottom:1em;
+  }
 
-   #how button.paging {
-     top:55px;
-   }
+  #how button.paging {
+    top:55px;
+  }
 
-   button.paging prev {
-     margin-left:-65px;
-   }
-   .button-previous {
-     margin-left:-20em;
-   }
-   .navbar-nav > li {
-     display:block;
-     float:left;
-     list-style:none;
-     margin:0;
-     padding:0;
-     position:relative;
-     right:50%;
-     clear:both;
-   }
-   .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  button.paging prev {
+    margin-left:-65px;
+  }
+  .button-previous {
+    margin-left:-20em;
+  }
+  .navbar-nav > li {
+    display:block;
+    float:left;
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:relative;
+    right:50%;
+    clear:both;
+  }
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     padding-bottom:150px;
     max-height: none;
     overflow-x: hidden;
   }
+}
+#presale-counters a{
+  text-decoration: none;
+}
 
-  #philosophy-right{
-    padding-left: 15px
-  }
+#presale-counters h4{
+  margin:0;
+}
 
+#presale-counters p.subheader{
+  font-weight: bold;
+  margin: 5px 0 10px;
+}
+
+#counters-primary .dial-container{
+  display: inline-block;
+  width: 60px;
+  height: 90px;
+  overflow: hidden;
+  font-size: 22px;
+  position: relative;
+}
+#counters-primary .dial-label{
+  position: absolute;
+  left:0;
+  top: 45px;
+  width: 60px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #777;
+}
+
+#counters-primary .counter-header, #counters-primary .counter-subheader,
+#counters-secondary .counter-header, #counters-secondary .counter-subheader{
+  display: block;
+}
+#counters-primary .headers{
+  padding: 13px;
+}
+
+#counters-primary h4{
+  text-transform:none;
+  font-weight:bold;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+
+#counters-primary .dial-shim {
+  position:absolute;
+  top:23px;
+  left: -50%;
+  margin-left: 44px;
+}
+#counters-primary .delimiter{
+  font-size: 34px;
+  line-height: 52px;
+  vertical-align: top;
+}
+
+#total-sold-container .total{
+  font-size: 45px;
+}
+
+#total-sold-container .total-currency-label{
+  font-size: 22px;
+}
+
+#total-sold-container .amount{
+  font-size: 22px;
+}
+
+#total-sold-container .amount-currency-label{
+  font-size: 16px;
+}
+#total-sold-container a{
+  font-size: 12px;
+  display: block;
+}
+#total-sold-container h4.subheadline{
+  margin-bottom: 0;
+  line-height: 30px;
+}
+
+#counters-secondary .btn-buy-ether{
+  background-color: #333;
+  padding: 5px;
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+  color: #fff;
 }
