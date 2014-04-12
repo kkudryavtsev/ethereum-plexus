@@ -32,3 +32,5 @@ sails lift
 Sails will report the interface/port it's listening on. To make configuration changes for different environments, modify config/local.js.
 
 Happy hacking!
+
+- ether-sale version
