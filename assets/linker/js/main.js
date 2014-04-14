@@ -115,14 +115,24 @@ $(function() {
     crossLinks: true
   });
 
+  var $qrDepAddr = $("#qr-deposit-address"),
+      $purchaseCancel = $("#purchase-cancel"),
+      $entropyProgress = $("#entropy-progress"),
+      $downloadLink = $("#downloadLink");
 
+
+  $downloadLink.click(function(e){
+    e.preventDefault();
+  });
   
   var initPresaleCounters = function(){
+    
     var ETHER_FOR_BTC=2000,
         FUNDRAISING_ADDRESS="1FfmbHfnpaZjKFvyi1okTjJJusN455paPH",
         SATOSHIS_IN_BTC=100000000,
         START_DATETIME= "2014-03-22 00:00:00",
-        END_DATETIME= "2014-03-29 00:00:00";
+        END_DATETIME= "2014-05-29 00:00:00",
+        appStepsSlider;
     
 
     var knobDefaults = {
@@ -135,8 +145,8 @@ $(function() {
     };
     var startsAt = moment(START_DATETIME).zone(0),
         endsAt = moment(END_DATETIME).zone(0),
-        $saleDurationDials = $("#sale-duration-container"),
-        $rateCountdownDials = $("#rate-countdown-container");
+        $saleDurationDials = $(".sale-duration-container"),
+        $rateCountdownDials = $(".rate-countdown-container");
 
     var createKnob = function($el, settings){
       $el.knob(_.extend({}, knobDefaults, settings));
@@ -172,9 +182,10 @@ $(function() {
     setupTimerDials($rateCountdownDials, 0);
 
     
-    $("#counters-primary input").css({
+    $(".countdown-dials input").css({
       height: "26px",
-      "margin-top": "5px"
+      "margin-top": "7px",
+      "font-size": "18px"
     });
 
     var updateTimerDial = function($container, type, delta){
@@ -218,15 +229,66 @@ $(function() {
       $("#total-sold-container .total").text(numeral(btc).format("0,0"));
     });
 
+
+    window.onWalletReady = function(){
+      $entropyProgress.hide();
+      appStepsSlider.setNextPanel(1);
+      $(".step-breadcrumbs").attr("data-step", "2");
+    };
+
+    // hack to make qr code render (not sure why the original code doesn't work)
+    window.showQrCode = function(address){
+      console.log("show qr");
+      $qrDepAddr.qrcode({width: 175, height: 175, text: 'bitcoin:' + address});
+    };
+
+    $("#confirmations-dial").knob({
+      readOnly: true,
+      thickness: 0.05,
+      width: 90,
+      fgColor: "#333",
+      bgColor: "#ddd",
+      font: "inherit"
+    });
+
+    $("#confirmations-dial").css("color", "#fff");
+
+    window.onTransactionComplete = function(downloadLinkHref){
+      $entropyProgress.hide();
+      appStepsSlider.setNextPanel(2);
+      $(".step-breadcrumbs").attr("data-step", "3");
+      
+      $purchaseCancel.hide();
+
+      $downloadLink.attr("href", downloadLinkHref);
+    };
+
+    //when nesting sliders, inner ones should be initialised first.
+    //fuck knows why...
+    appStepsSlider = $("#app-steps-content").liquidSlider({ 
+      autoSlide: false,
+      dynamicTabs: false,
+      dynamicArrows: false,
+      hideSideArrows: false,
+      slideEaseDuration: 600
+    }).data("liquidSlider");
+    
     $('#presale-counters-slider').liquidSlider({
       autoSlide: false,
       dynamicTabs: false,
       dynamicArrows: false,
       hideSideArrows: true,
-      slideEaseDuration: 600
+      slideEaseDuration: 600,
+      firstPanelToLoad: 2 //DEBUG: 3
     });
-    
-  };
+    //a hack to disable the idiotic css settings liquid-slider defaults to:
+    // $("#presale-counters-slider-wrapper, #app-steps-content").css({
+    //   "max-width": "100%"
+    // });
 
+    onWalletReady();//DEBUG
+    //onTransactionComplete();//DEBUG
+  };
+  
   initPresaleCounters();
 });

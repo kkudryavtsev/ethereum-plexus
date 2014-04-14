@@ -85,7 +85,19 @@ module.exports = function (grunt) {
     'linker/js/numeral.js',
     'linker/js/underscore-min.js',
     'linker/js/moment.min.js',
-    'linker/js/main.js'
+    'linker/js/main.js',
+
+    'linker/js/ethersale/angular.min.js',
+    'linker/js/ethersale/qrcode.min.js',
+    'linker/js/ethersale/jquery.qrcode.min.js',
+    'linker/js/ethersale/bitcoinjs-min.js',
+    'linker/js/ethersale/aes.js',
+    'linker/js/ethersale/pbkdf2.js',
+    'linker/js/ethersale/sha256.js',
+    'linker/js/ethersale/sha3.js',
+    'linker/js/ethersale/xethtool.js',
+    'linker/js/ethersale/base64.js',
+    'linker/js/ethersale/app.js'
 
     // DO NOT USE. INSERT STATIC PATH ABOVE
     // Uncommenting the line below will result in revoking push access

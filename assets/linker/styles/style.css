@@ -45,9 +45,9 @@ footer {
 }
 
 #interactive, #presale-counters {
-  padding-top:10px;
+  padding-top:5px;
   padding-bottom:20px;
-  margin-top:-60px;
+  margin-top:-87px;
 }
 
 #tagline {
@@ -700,6 +700,11 @@ a:hover {
     overflow-x: hidden;
   }
 }
+
+#sale-counters-container{
+  padding-top: 50px;
+}
+
 #presale-counters a{
   text-decoration: none;
 }
@@ -713,15 +718,15 @@ a:hover {
   margin: 5px 0 10px;
 }
 
-#counters-primary .dial-container{
+.countdown-dials .dial-container{
   display: inline-block;
   width: 60px;
-  height: 90px;
+  height: 65px;
   overflow: hidden;
   font-size: 22px;
   position: relative;
 }
-#counters-primary .dial-label{
+.countdown-dials .dial-label{
   position: absolute;
   left:0;
   top: 45px;
@@ -748,15 +753,15 @@ a:hover {
 }
 
 
-#counters-primary .dial-shim {
+.countdown-dials .dial-shim {
   position:absolute;
   top:23px;
   left: -50%;
   margin-left: 44px;
 }
-#counters-primary .delimiter{
-  font-size: 34px;
-  line-height: 52px;
+.countdown-dials .delimiter{
+  font-size: 20px;
+  line-height: 40px;
   vertical-align: top;
 }
 
@@ -791,4 +796,153 @@ a:hover {
   display: block;
   margin: 0 auto;
   color: #fff;
+}
+#ethersale-app{
+  position: relative;
+  border: 0;
+}
+#ethersale-app h3{
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+#ethersale-app .step-breadcrumbs{
+  margin-bottom: 10px;
+}
+
+#ethersale-app .step-breadcrumbs span{
+  padding: 0 3px;
+  color: #aaa;
+}
+
+#ethersale-app .step-breadcrumbs[data-step="1"] .step1, #ethersale-app .step-breadcrumbs[data-step="2"] .step2, #ethersale-app .step-breadcrumbs[data-step="3"] .step3{
+  color: #000;
+}
+
+#entropy-progress{
+  position: absolute;
+  width: 100%;
+}
+
+#entropy-progress .bar{
+  background-color: #777;
+  height: 3px;
+}
+
+#purchase-cancel{
+  margin-top: 25px;
+  text-align: right;
+  display: block;
+}
+
+.step1-content p {
+  margin-bottom: 5px;
+}
+
+#app-steps-content .currency-code{
+  font-size: 0.8em;
+}
+
+#app-steps-content section{
+  margin-bottom: 20px;
+}
+#app-steps-content .amount-box{
+  padding: 3px;
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  font-size: 22px;
+}
+#app-steps-content .exchange-delimiter{
+  margin-top: 30px;
+  display: block;
+  font-size: 20px;
+}
+
+#app-steps-content .copy{
+  text-align: justify;
+}
+
+#app-steps-content h4{
+  text-transform: none;
+  margin-bottom: 30px;
+}
+
+#app-steps-content p.important{
+  font-size: 20px;
+}
+
+#app-steps-content label{
+  text-align: left;
+  display: block;
+}
+
+#app-steps-content .label-container{
+  height: 25px;
+}
+
+#app-steps-content label.error{
+  font-size: 12px;
+  line-height: 20px;
+  color: #f00;
+}
+
+#app-steps-content label.mini{
+  font-size: 12px;
+}
+
+#app-steps-content input{
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  border-radius: 0;
+}
+
+#strength{
+  padding-left: 15px;
+}
+#strength li{
+  display: inline-block;
+  width: 20px;
+  height: 5px;
+  margin-right: 3px;
+}
+
+.step1-content .fix-height{
+  height: 340px;
+}
+
+#qr-deposit-address{
+  height: 175px;
+  margin: auto 15px;
+}
+
+.step2-content .payment-address{
+  font-size: 16px;
+  text-align: left;
+  display: block;
+}
+
+#confirmations-container{
+  margin: 60px auto;
+  height: 90px;
+}
+
+#print-purchase-page{
+  position: absolute;
+  font-weight: bold;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+#downloadLink{
+  display: block;
+  background-color: #555;
+  color: #fff;
+  padding: 10px 30px;
+  margin: auto 40px;
+}
+
+#recommendations{
+  text-align: left;
 }

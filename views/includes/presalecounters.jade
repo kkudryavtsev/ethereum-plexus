@@ -1,7 +1,8 @@
-div#presale-counters-slider.text-center.liquid-slider
-  div.container
+div#presale-counters-slider.text-center.liquid-slider(ng-app="ethereum")
+  #ethersale-charts.container
+  div#sale-counters-container.container
     div#counters-primary.row
-      div#sale-duration-container.col-md-4
+      div.sale-duration-container.col-md-4.countdown-dials
         div.inner.hide-after-end
           h4 Sale duration:
           div.dial-container
@@ -10,17 +11,14 @@ div#presale-counters-slider.text-center.liquid-slider
           span.delimiter :
           div.dial-container
             input(type="text", value="0").dial.hours
-            .dial-shim.dial-duration-hours-shim
             span.dial-label Hours
           span.delimiter :
           div.dial-container
             input(type="text", value="0").dial.minutes
-            .dial-shim.minutes
             span.dial-label Minutes
           span.delimiter :
           div.dial-container
             input(type="text", value="0").dial.seconds
-            .dial-shim.seconds
             span.dial-label Seconds
       div#total-sold-container.col-md-4
         div.inner
@@ -35,7 +33,7 @@ div#presale-counters-slider.text-center.liquid-slider
             span.amount.eth-to-btc 2000
             span.amount-currency-label ETH
           a(href="#") Terms and conditions
-      div#rate-countdown-container.col-md-4
+      div.rate-countdown-container.col-md-4.countdown-dials
         div.inner.hide-after-end
           h4 Until new rate: 1BTC=
             span.next-eth-to-btc 2000
@@ -46,22 +44,164 @@ div#presale-counters-slider.text-center.liquid-slider
           span.delimiter :
           div.dial-container
             input(type="text", value="0").dial.hours
-            .dial-shim.dial-duration-hours-shim
+
             span.dial-label Hours
           span.delimiter :
           div.dial-container
             input(type="text", value="0").dial.minutes
-            .dial-shim.minutes
+
             span.dial-label Minutes
           span.delimiter :
           div.dial-container
             input(type="text", value="0").dial.seconds
-            .dial-shim.seconds
+
             span.dial-label Seconds
     #counters-secondary.row
       .col-md-4
+        a(href="#left", data-liquidslider-ref="#presale-counters-slider").btn-buy-ether.hide-after-end Charts
       .col-md-4
       .col-md-4
         a(href="#right", data-liquidslider-ref="#presale-counters-slider").btn-buy-ether.hide-after-end Buy Ether
   #ethersale-app
-    h2 Ethersale app      
+    div(ng-controller="PurchaseCtrl")
+      #entropy-progress
+        .bar(style="width:{{100 * (entropy.length < requiredEntropyLength ? entropy.length : requiredEntropyLength) / requiredEntropyLength }}%")
+      .container
+        .row
+          .col-md-4
+          .col-md-4
+            h3 purchase ether
+            .step-breadcrumbs(data-step="1")
+              span.step1 step 1 >
+              span.step2 step 2 >
+              span.step3 step 3
+          .col-md-4
+            a#purchase-cancel(href="#left", data-liquidslider-ref="#presale-counters-slider") < cancel
+        #app-steps-content.liquid-slider
+          .step1-content
+            .row
+              .col-md-5
+                .fix-height
+                  section
+                    p.exchange-rate
+                      strong Current rate:
+                      span 1
+                      span.currency-code BTC
+                      span =
+                      span.eth-to-btc 2,000
+                      span.currency-code ETH
+                    p.exchange-rate
+                      strong Until new rate:
+                      span 1
+                      span.currency-code BTC
+                      span =
+                      span.next-eth-to-btc 1,950
+                      span.currency-code ETH
+                  section.rate-countdown-container.countdown-dials
+                    div.dial-container
+                      input(type="text", value="0").dial.days
+                      span.dial-label Days
+                    span.delimiter :
+                    div.dial-container
+                      input(type="text", value="0").dial.hours
+                      span.dial-label Hours
+                    span.delimiter :
+                    div.dial-container
+                      input(type="text", value="0").dial.minutes
+                      span.dial-label Minutes
+                    span.delimiter :
+                    div.dial-container
+                      input(type="text", value="0").dial.seconds
+                      span.dial-label Seconds
+                  section.row
+                    .col-md-5
+                      p amount BTC:
+                      .amount-box 1
+                    .col-md-2.delimiter
+                      span.exchange-delimiter =
+                    .col-md-5
+                      p amount ETH:
+                      .amount-box.eth-to-btc 2,000
+                  section
+                    p.copy A password is needed to encrypt and recover your payment keys. In addition to generating a downloadable backup, we will also send you an email with recovery information attached.
+                section
+                  p.important Do not forget your password!
+              .col-md-2
+              .col-md-5
+                .fix-height
+                  form(name="purchase_form", role="form", novalidate)
+                    section.form-group
+                      label Your wallet back up will be emailed to this email
+                      input#purchase-email.form-control(type="email", name="email", ng-model="email", placeholder="Enter your email", required, ng-disabled="wallet.ethaddr")
+                      .label-container
+                        label.error(ng-show="purchase_form.email_repeat.$error.match") Emails do not match
+                      input#purchase-email-repeat.form-control(type="email", name="email_repeat", ng-model="email_repeat", placeholder="Enter your email", data-match="email", ng-disabled="wallet.ethaddr")
+                    section.form-group
+                      label.mini
+                        p This will serve as your wallet password
+                        div Password strength:
+                          ul#strength(check-strength="password")
+                      input.form-control(type="password", name="password", ng-model="password", required, ng-disabled="wallet.ethaddr", placeholder="Enter your password")
+                      .label-container
+                        label.error(ng-show="purchase_form.password_repeat.$error.match") Passwords do not match
+                      input#password_repeat.form-control(type="password", name="password_repeat", ng-model="password_repeat", required, data-match="password", ng-disabled="wallet.ethaddr", placeholder="Enter your password")
+
+                section
+                  p.important(ng-if="!wallet.ethaddr") {{ "Move your mouse to generate entropy" }}
+          .step2-content
+            h4 You are about to buy 
+              span.eth-to-btc 2,000
+              span.currency-code ETH 
+              | for 1
+              span.currency-code BTC
+            div
+              .row
+                .col-md-5
+                  section
+                    p send bitcoins to this address:
+                  section
+                    a(href="bitcoin:{{wallet.btcaddr}}")
+                      div#qr-deposit-address
+                  section
+                    p.copy payment address:
+                    a.payment-address.nowrap(href="bitcoin:{{wallet.btcaddr}}") {{wallet.btcaddr}}
+                  section
+                    p.copy Send bitcoin to the above address to buy Ether. Once we have your payment confirmed the option to download your wallet will appear.                    
+                .col-md-2
+                .col-md-5
+                  p purchase status:
+                  #confirmations-container
+                    input#confirmations-dial(type="text", value="0")
+                  section
+                    p.copy Your ethereum address:
+                    p.payment-address {{wallet.ethaddr}}
+                  section
+                    p.copy Once we have confirmed the payment, the option to download your wallet will appear. Your will also be emailed a back up of this file.
+          .step3-content
+            a#print-purchase-page(onclick="window.print();") print page
+            h4 You are buying 
+              span.eth-to-btc 2,000
+              span.currency-code ETH 
+              | for 1
+              span.currency-code BTC
+            div
+              .row
+                .col-md-5
+                  section
+                    p.important bitcoin transaction ID:
+                    p.payment-address xyz
+                  section
+                    p.copy Your ethereum address:
+                    p.payment-address {{wallet.ethaddr}}
+                .col-md-2
+                .col-md-5
+                  section
+                    p.copy This file represents your private key to your wallet, encrypted by your password in a .json file. When he ethereum block-chain is live you can import this file in your wallet and the balance will be adjusted automatically with the purchased amount.
+                  section
+                    a#downloadLink(download="ethereum_wallet.json", target="_blank", ng-click="downloadWallet()", href="#") Download your wallet
+                  section
+                    p.copy Recommendations
+                    ol#recommendations
+                      li Make sure you do not forget your password!
+                      li Create backups on multiple mediums
+                      li Visit our forums if you have any questions
