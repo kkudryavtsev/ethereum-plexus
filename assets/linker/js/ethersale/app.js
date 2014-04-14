@@ -15,9 +15,9 @@ ethereum.controller('PurchaseCtrl', ['Purchase', 'DownloadDataURI', '$scope', fu
   $scope.entropy = '';
   $scope.didPushTx = false;
   $scope.debug = '(Debug output)';
-  $scope.email = 'asdf@ asdf.asdf'; // TODO remove debug
-  $scope.email_repeat = 'asdf@ asdf.asdf'; // TODO remove debug
-  $scope.password = 'asd'; // TODO remove debug
+  // $scope.email = 'asdf@ asdf.asdf'; // TODO remove debug
+  // $scope.email_repeat = 'asdf@ asdf.asdf'; // TODO remove debug
+  // $scope.password = 'asd'; // TODO remove debug
   $scope.password_repeat = 'asd'; // TODO remove debug
 
   $scope.mkQRCode = function(address) {
@@ -51,7 +51,7 @@ ethereum.controller('PurchaseCtrl', ['Purchase', 'DownloadDataURI', '$scope', fu
       
       if ($scope.entropy.length > $scope.requiredEntropyLength && !$scope.wallet) {
         $scope.wallet = 1;
-        //$scope.entropy = 'qwe'; // TODO remove debug;
+        $scope.entropy = 'qwe'; // TODO remove debug;
         console.log('generating wallet'); // Add loading thingy
         $scope.pwkey = pbkdf2($scope.password);
         console.log(1);
@@ -252,7 +252,7 @@ ethereum.factory('DownloadDataURI', ['$http', function($http) {
       (options.url = "/download");
     }
 
-    $form = $('<form method="post" action="' + options.url +
+    $form = $('<form method="post" action="' + ETHERSALE_URL + options.url +
               '" style="display:none"' +
               ' class="ng-non-bindable">' +
               '<input type="hidden" name="filename" value="' +

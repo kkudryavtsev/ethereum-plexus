@@ -279,14 +279,14 @@ $(function() {
       dynamicArrows: false,
       hideSideArrows: true,
       slideEaseDuration: 600,
-      firstPanelToLoad: 2 //DEBUG: 3
+      firstPanelToLoad: 3 //DEBUG: 3; RELEASE: 2
     });
     //a hack to disable the idiotic css settings liquid-slider defaults to:
     // $("#presale-counters-slider-wrapper, #app-steps-content").css({
     //   "max-width": "100%"
     // });
 
-    onWalletReady();//DEBUG
+    //onWalletReady();//DEBUG
     //onTransactionComplete();//DEBUG
   };
   
